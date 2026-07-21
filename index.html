@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tigre · Municipio — Prototipo</title>
+<title>Secretaría de Mujeres, Géneros e Infancias · Tigre</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
@@ -13,11 +13,35 @@
 <div class="device" id="device">
   <div class="proto-badge">Prototipo</div>
 
+  <!-- TOP NAV (visible en desktop) -->
+  <nav class="topnav" id="topnav">
+    <img class="topnav-logo" src="assets/logo-tigre.png" alt="Municipio de Tigre">
+    <span class="topnav-title">Secretaría de Mujeres, Géneros e Infancias</span>
+    <div class="topnav-links">
+      <button class="topnav-link active" onclick="goTo('home');setTopnavActive(this)">Inicio</button>
+      <button class="topnav-link" onclick="goTo('notif');setTopnavActive(this)">Novedades</button>
+    </div>
+    <button class="topnav-bell" onclick="goTo('notif')">🔔<span class="topnav-bell-dot"></span></button>
+  </nav>
+
+  <!-- MODAL DE ARTÍCULO -->
+  <div class="modal-overlay" id="article-modal" onclick="closeArticleModal(event)">
+    <div class="modal-sheet">
+      <div class="modal-handle"></div>
+      <div class="modal-hero">
+        <span class="modal-tag" id="modal-tag"></span>
+        <div class="modal-title" id="modal-title"></div>
+        <div class="modal-subtitle" id="modal-subtitle"></div>
+      </div>
+      <div class="modal-body-text" id="modal-body"></div>
+      <button class="modal-close-btn" onclick="closeArticleModal()">Cerrar</button>
+    </div>
+  </div>
+
   <!-- ============ ONBOARDING ============ -->
   <section class="screen active" id="screen-onboarding">
-    <div class="hero rosette-pattern" style="flex:1; display:flex; flex-direction:column; padding-bottom:0;">
+    <div class="hero rosette-pattern" style="flex:1;display:flex;flex-direction:column;padding-bottom:0;">
       <button class="onb-skip" onclick="finishOnboarding()">Omitir</button>
-      <div class="statusbar" style="color:#fff;"><span>9:41</span></div>
       <div class="onb-slides" id="onb-slides">
         <div class="onb-slide">
           <div class="onb-icon">⌂</div>
@@ -42,19 +66,18 @@
     </div>
   </section>
 
-  <!-- ============ NOTIFICATIONS ============ -->
+  <!-- ============ NOTIFICACIONES ============ -->
   <section class="screen" id="screen-notif">
     <div class="hero rosette-pattern" style="padding-bottom:20px;">
-      <div class="statusbar" style="color:#fff;"><span>9:41</span></div>
       <div class="hero-top">
         <button class="back-btn" onclick="goTo('home')">‹</button>
-        <span class="hero-title" style="margin-left:2px;">Notificaciones</span>
+        <span style="font-size:14px;font-weight:700;opacity:.9;margin-left:4px;">Novedades</span>
       </div>
       <div class="hero-greet">
-        <h1 style="font-size:19px;">Novedades para vos</h1>
+        <h1 style="font-size:20px;">Novedades para vos</h1>
       </div>
     </div>
-    <div class="content">
+    <div class="content" style="background:#fff;">
       <div class="notif-item">
         <div class="notif-dot"></div>
         <div><h5>Nuevo taller: Nuevas Masculinidades</h5><p>Se abrieron inscripciones para el 18/07.</p><span class="t">Hoy · 08:12</span></div>
@@ -81,7 +104,6 @@
   <!-- ============ HOME ============ -->
   <section class="screen" id="screen-home">
     <div class="hero rosette-pattern">
-      <div class="statusbar" style="color:#fff;"><span>9:41</span></div>
       <div class="hero-top">
         <img class="logo-mark" src="assets/logo-tigre.png" alt="Municipio de Tigre">
         <button class="bell-btn" onclick="goTo('notif')">🔔<span class="bell-dot"></span></button>
@@ -90,102 +112,110 @@
         <h1>Hola, vecina / vecino</h1>
         <p>Secretaría de Mujeres, Géneros e Infancias · Municipio de Tigre</p>
       </div>
-
       <div class="carousel-wrap">
         <div class="carousel" id="carousel"></div>
         <div class="dots" id="dots"></div>
       </div>
     </div>
 
-    <div class="content" style="padding-top:20px;">
+    <div class="content">
+      <div class="home-grid">
 
-      <div class="section-label">Accesos rápidos</div>
-      <div class="quick-grid">
-        <div class="quick-item"><div class="q-ic">📅</div><span>Turnos</span></div>
-        <div class="quick-item"><div class="q-ic">🧵</div><span>Talleres</span></div>
-        <div class="quick-item"><div class="q-ic">📍</div><span>Contacto</span></div>
-        <div class="quick-item"><div class="q-ic">📣</div><span>Redes</span></div>
-      </div>
+        <!-- COLUMNA PRINCIPAL -->
+        <div class="home-main">
+          <div class="section-label">Accesos rápidos</div>
+          <div class="quick-grid" style="margin-bottom:28px;">
+            <div class="quick-item"><div class="q-ic">📅</div><span>Turnos</span></div>
+            <div class="quick-item"><div class="q-ic">🧵</div><span>Talleres</span></div>
+            <div class="quick-item"><div class="q-ic">📍</div><span>Contacto</span></div>
+            <div class="quick-item"><div class="q-ic">📣</div><span>Redes</span></div>
+          </div>
 
-      <div class="section-label">Próximos eventos</div>
-      <p class="source-note" style="margin-bottom:12px;">Se actualiza automáticamente cuando el equipo de Género o Infancia modifica su calendario.</p>
-      <div id="home-events-list" style="margin-bottom:6px;"></div>
+          <div class="section-label">Próximos eventos</div>
+          <p class="source-note" style="margin-bottom:12px;">Se actualiza cuando el equipo de Género o Infancia modifica su calendario.</p>
+          <div id="home-events-list" style="margin-bottom:6px;"></div>
 
-      <div class="section-label">Contactos de emergencia</div>
-      <div class="contact-card">
-        <h4>Línea 144 <span class="badge">24 hs</span></h4>
-        <p>Asesoramiento, acompañamiento y contención gratuita y confidencial ante situaciones de violencia de género.</p>
-        <div class="contact-actions">
-          <a href="tel:144" class="mini-btn solid">Llamar · 144</a>
+          <div class="section-label" style="margin-top:28px;">Bitácora · comentario anónimo</div>
+          <div class="contact-card">
+            <p style="margin-bottom:14px;">¿Viste o viviste una situación que querés contarnos? Podés dejarlo acá de forma anónima.</p>
+            <div class="field-label" style="margin-top:0;">Ámbito</div>
+            <select id="home-bit-ambito" onchange="updateBitacoraTipos()">
+              <option value="genero">Género</option>
+              <option value="infancia">Infancia</option>
+            </select>
+            <div class="field-label">Tipo de situación</div>
+            <select id="home-bit-tipo"></select>
+            <div class="field-label">Contanos qué observaste</div>
+            <textarea id="home-bit-detalle" placeholder="Describí la situación con el mayor detalle posible..."></textarea>
+            <div class="anon-row">☑ Enviar de forma anónima</div>
+            <button class="send-btn" onclick="submitBitacora()">Enviar aviso</button>
+          </div>
+
+          <div class="section-label" style="margin-top:28px;">Próximamente</div>
+          <div class="placeholder-box">
+            Trámites, mapa de dependencias y más servicios municipales se irán sumando.
+          </div>
         </div>
-      </div>
-      <div class="contact-card">
-        <h4>Línea 102 <span class="badge">24 hs</span></h4>
-        <p>Asistencia para emergencias de niños, niñas y adolescentes, los 365 días del año.</p>
-        <div class="contact-actions">
-          <a href="tel:102" class="mini-btn solid">Llamar · 102</a>
-        </div>
-      </div>
-      <div class="contact-card">
-        <h4>Comisaría de la Mujer y la Familia</h4>
-        <p>Av. Constituyente 410 (Ex Ruta 9), Gral. Pacheco.</p>
-        <div class="contact-actions">
-          <a href="tel:0114740-1934" class="mini-btn solid">Llamar</a>
-          <a href="#" class="mini-btn">Cómo llegar</a>
-        </div>
-      </div>
-      <div class="contact-card">
-        <h4>Comisaría 1ª de Tigre</h4>
-        <p>Av. del Trabajo y Sucre, Tigre.</p>
-        <div class="contact-actions">
-          <a href="tel:0114580-5222" class="mini-btn solid">Llamar</a>
-          <a href="#" class="mini-btn">Cómo llegar</a>
-        </div>
-      </div>
-      <div class="contact-card">
-        <h4>Fiscalía de Género</h4>
-        <p>Consultas y denuncias por violencia de género y abuso sexual. WhatsApp: 15-2385-5552.</p>
-        <div class="contact-actions">
-          <a href="tel:0114859-2532" class="mini-btn solid">Llamar</a>
-        </div>
-      </div>
-      <p class="source-note" style="margin-bottom:18px;">Datos de contacto según fuentes oficiales del Municipio de Tigre — verificar vigencia antes de publicar.</p>
 
-      <div class="section-label">Bitácora · comentario anónimo</div>
-      <div class="contact-card">
-        <p style="margin-bottom:14px;">¿Viste o viviste una situación que querés contarnos? Podés dejarlo acá de forma anónima.</p>
-        <div class="field-label" style="margin-top:0;">Ámbito</div>
-        <select id="home-bit-ambito" onchange="updateBitacoraTipos()">
-          <option value="genero">Género</option>
-          <option value="infancia">Infancia</option>
-        </select>
-        <div class="field-label">Tipo de situación</div>
-        <select id="home-bit-tipo"></select>
-        <div class="field-label">Contanos qué observaste</div>
-        <textarea id="home-bit-detalle" placeholder="Describí la situación con el mayor detalle posible..."></textarea>
-        <div class="anon-row">☑ Enviar de forma anónima</div>
-        <button class="send-btn" onclick="submitBitacora()">Enviar</button>
-      </div>
+        <!-- COLUMNA LATERAL (sidebar en desktop) -->
+        <div class="home-sidebar">
+          <div class="section-label">Contactos de emergencia</div>
+          <div class="contact-card">
+            <h4>Línea 144 <span class="badge">24 hs</span></h4>
+            <p>Asesoramiento y acompañamiento gratuito ante situaciones de violencia de género.</p>
+            <div class="contact-actions">
+              <a href="tel:144" class="mini-btn solid">Llamar · 144</a>
+            </div>
+          </div>
+          <div class="contact-card">
+            <h4>Línea 102 <span class="badge">24 hs</span></h4>
+            <p>Asistencia para emergencias de niños, niñas y adolescentes, los 365 días.</p>
+            <div class="contact-actions">
+              <a href="tel:102" class="mini-btn solid">Llamar · 102</a>
+            </div>
+          </div>
+          <div class="contact-card">
+            <h4>Comisaría de la Mujer y la Familia</h4>
+            <p>Av. Constituyente 410, Gral. Pacheco.</p>
+            <div class="contact-actions">
+              <a href="tel:0114740-1934" class="mini-btn solid">Llamar</a>
+              <a href="#" class="mini-btn">Cómo llegar</a>
+            </div>
+          </div>
+          <div class="contact-card">
+            <h4>Comisaría 1ª de Tigre</h4>
+            <p>Av. del Trabajo y Sucre, Tigre.</p>
+            <div class="contact-actions">
+              <a href="tel:0114580-5222" class="mini-btn solid">Llamar</a>
+              <a href="#" class="mini-btn">Cómo llegar</a>
+            </div>
+          </div>
+          <div class="contact-card">
+            <h4>Fiscalía de Género</h4>
+            <p>WhatsApp: 15-2385-5552.</p>
+            <div class="contact-actions">
+              <a href="tel:0114859-2532" class="mini-btn solid">Llamar</a>
+            </div>
+          </div>
+          <p class="source-note" style="margin-bottom:24px;">Datos según fuentes oficiales · verificar vigencia.</p>
 
-      <div class="section-label">Sobre la Secretaría</div>
-      <div class="info-card">
-        <p>La Secretaría de Mujeres, Géneros e Infancias acompaña, orienta y previene situaciones de violencia de género y vulneración de derechos de niñas, niños y adolescentes en todo el Municipio de Tigre.</p>
-        <div class="info-row">📍 Hipólito Yrigoyen 1264, Gral. Pacheco</div>
-        <div class="info-row">🕒 Lunes a viernes de 8 a 18 hs</div>
-        <div class="info-row">☎ (011) 4506-5559</div>
-      </div>
+          <div class="section-label">Sobre la Secretaría</div>
+          <div class="info-card">
+            <p>La Secretaría de Mujeres, Géneros e Infancias acompaña, orienta y previene situaciones de violencia y vulneración de derechos en todo el Municipio de Tigre.</p>
+            <div class="info-row">📍 Hipólito Yrigoyen 1264, Gral. Pacheco</div>
+            <div class="info-row">🕒 Lunes a viernes · 8 a 18 hs</div>
+            <div class="info-row">☎ (011) 4506-5559</div>
+          </div>
 
-      <div class="chip-row">
-        <div class="chip"><b class="num">12</b>talleres este mes</div>
-        <div class="chip"><b class="num">3</b>líneas de atención</div>
-        <div class="chip"><b class="num">5</b>barrios con promotoras</div>
-      </div>
+          <div class="chip-row">
+            <div class="chip"><b class="num">12</b>talleres este mes</div>
+            <div class="chip"><b class="num">3</b>líneas de atención</div>
+            <div class="chip"><b class="num">5</b>barrios</div>
+          </div>
+        </div>
 
-      <div class="section-label">Próximamente</div>
-      <div class="placeholder-box">
-        Trámites, mapa de dependencias y más servicios municipales se irán sumando a este dashboard.
-      </div>
-    </div>
+      </div><!-- /home-grid -->
+    </div><!-- /content -->
 
     <div class="hidden-access">
       <span class="ha-lock">🔒</span>
@@ -202,13 +232,12 @@
       <div class="tab"><span class="ic">☎</span>Contacto</div>
       <div class="tab"><span class="ic">⋯</span>Perfil</div>
     </div>
-    <div class="toast" id="toast-home">Comentario enviado de forma anónima. Gracias por avisarnos.</div>
+    <div class="toast" id="toast-home">Comentario enviado de forma anónima. Gracias.</div>
   </section>
 
   <!-- ============ GÉNERO ============ -->
   <section class="screen" id="screen-genero" data-theme="genero">
     <div class="hero rosette-pattern">
-      <div class="statusbar" style="color:#fff;"><span>9:41</span></div>
       <div class="hero-top">
         <button class="back-btn" onclick="goTo('home')">‹</button>
         <img class="logo-mark" src="assets/logo-tigre.png" alt="Municipio de Tigre">
@@ -230,7 +259,7 @@
       <div id="genero-bitacora-panel"></div>
 
       <span class="staff-flag">Gestionar calendario</span>
-      <p class="source-note" style="margin-bottom:14px;">Tocá el lápiz para editar un taller o turno, o la ✕ para quitarlo. Los cambios se reflejan al instante en el Dashboard del vecino.</p>
+      <p class="source-note" style="margin-bottom:14px;">Tocá el lápiz para editar o la ✕ para quitar. Los cambios se reflejan al instante en el Dashboard.</p>
       <div id="genero-manage-list" style="margin-bottom:16px;"></div>
 
       <div class="manage-form">
@@ -247,11 +276,12 @@
       </div>
 
       <div class="section-label" style="margin-top:24px;">Cargar novedad al carrusel</div>
-      <p class="source-note" style="margin-bottom:12px;">Aparece al instante en el carrusel del Dashboard del vecino.</p>
+      <p class="source-note" style="margin-bottom:12px;">Aparece al instante en el carrusel del Dashboard.</p>
       <div id="genero-novedad-list" style="margin-bottom:12px;"></div>
       <div class="manage-form">
         <input type="text" id="genero-nov-title" placeholder="Título de la novedad">
         <input type="text" id="genero-nov-detail" placeholder="Bajada breve (opcional)">
+        <input type="text" id="genero-nov-body" placeholder="Texto completo del artículo (opcional)">
         <button class="send-btn" style="margin-top:2px;" onclick="addNovedad('genero')">+ Agregar al carrusel</button>
       </div>
 
@@ -272,14 +302,14 @@
           <div class="bar-row"><div class="lbl"><span>Gral. Pacheco</span><span class="num">4</span></div><div class="bar-track"><div class="bar-fill" style="width:64%"></div></div></div>
           <div class="bar-row"><div class="lbl"><span>Talar</span><span class="num">2</span></div><div class="bar-track"><div class="bar-fill" style="width:32%"></div></div></div>
           <div class="bar-row"><div class="lbl"><span>Rincón de Milberg</span><span class="num">1</span></div><div class="bar-track"><div class="bar-fill" style="width:16%"></div></div></div>
-          <p class="source-note" style="margin-bottom:0;">Disponible para Directoras/es Generales y Coordinadoras/es. Datos de ejemplo.</p>
+          <p class="source-note" style="margin-bottom:0;">Datos de ejemplo.</p>
         </div>
 
         <div id="genero-graficos-pane" style="display:none;">
           <div class="pie-row">
             <div class="pie-card">
               <div class="pie-title">Talleres dados<br>por sucursal</div>
-              <div class="pie-chart" style="background:conic-gradient(#6C2C82 0% 41.7%, #9B5CB0 41.7% 75%, #C9A0D9 75% 91.7%, #EAD9F0 91.7% 100%);"></div>
+              <div class="pie-chart" style="background:conic-gradient(#6C2C82 0% 41.7%,#9B5CB0 41.7% 75%,#C9A0D9 75% 91.7%,#EAD9F0 91.7% 100%);"></div>
               <div class="pie-legend">
                 <div class="pie-legend-item"><span class="pie-dot" style="background:#6C2C82;"></span>Tigre Centro <b>42%</b></div>
                 <div class="pie-legend-item"><span class="pie-dot" style="background:#9B5CB0;"></span>Gral. Pacheco <b>33%</b></div>
@@ -289,15 +319,13 @@
             </div>
             <div class="pie-card">
               <div class="pie-title">Asistencia y ausencia<br>a talleres</div>
-              <div class="pie-chart" style="background:conic-gradient(#6C2C82 0% 82%, #e3d9e6 82% 100%);"></div>
+              <div class="pie-chart" style="background:conic-gradient(#6C2C82 0% 82%,#e3d9e6 82% 100%);"></div>
               <div class="pie-legend">
                 <div class="pie-legend-item"><span class="pie-dot" style="background:#6C2C82;"></span>Asistencia <b>82%</b></div>
                 <div class="pie-legend-item"><span class="pie-dot" style="background:#e3d9e6;"></span>Ausencia <b>18%</b></div>
               </div>
             </div>
           </div>
-          <p class="source-note" style="margin-bottom:18px;">Datos de ejemplo, calculados sobre inscriptos y confirmados por taller.</p>
-
           <div class="pie-row">
             <div class="pie-card">
               <div class="pie-title">Bitácora: estado de los avisos recibidos</div>
@@ -305,11 +333,11 @@
               <div class="pie-legend" id="genero-bitacora-pie-legend"></div>
             </div>
           </div>
-          <p class="source-note" style="margin-bottom:0;">Se actualiza en tiempo real con los avisos recibidos por bitácora.</p>
+          <p class="source-note" style="margin-bottom:0;">Se actualiza en tiempo real con los avisos recibidos.</p>
         </div>
 
         <button class="export-btn" onclick="exportStats('genero')">⬇ Exportar estadísticas (CSV)</button>
-        <p class="source-note" id="genero-edit-note" style="display:none; margin-top:10px;">🔓 Como Directora General tenés acceso total: podés editar o quitar cualquier carga hecha por el equipo, en calendario, novedades y bitácora.</p>
+        <p class="source-note" id="genero-edit-note" style="display:none;margin-top:10px;">🔓 Como Directora General tenés acceso total a la plataforma.</p>
       </div>
 
       <div class="section-label" style="margin-top:24px;">Derivación externa</div>
@@ -324,22 +352,21 @@
       </div>
       <div class="contact-card">
         <h4>Refugio / dispositivo de protección</h4>
-        <p>La derivación a un dispositivo de protección se coordina a través de la Línea 144, no se comparte la ubicación por razones de seguridad.</p>
+        <p>La derivación se coordina a través de la Línea 144. No se comparte ubicación por seguridad.</p>
       </div>
       <div class="contact-card">
         <h4>Colegio de Abogados de San Isidro</h4>
         <p>Asesoramiento jurídico gratuito. Departamento Judicial San Isidro (cubre Tigre).</p>
       </div>
-      <p class="source-note">Directorio de referencia — completar y confirmar con la Secretaría antes de publicar.</p>
+      <p class="source-note">Directorio de referencia — confirmar con la Secretaría antes de publicar.</p>
     </div>
 
-    <div class="toast" id="toast-genero">Comentario enviado de forma anónima. Gracias por avisarnos.</div>
+    <div class="toast" id="toast-genero">Guardado correctamente.</div>
   </section>
 
   <!-- ============ INFANCIA ============ -->
   <section class="screen" id="screen-infancia" data-theme="infancia">
     <div class="hero rosette-pattern">
-      <div class="statusbar" style="color:#fff;"><span>9:41</span></div>
       <div class="hero-top">
         <button class="back-btn" onclick="goTo('home')">‹</button>
         <img class="logo-mark" src="assets/logo-tigre.png" alt="Municipio de Tigre">
@@ -361,7 +388,7 @@
       <div id="infancia-bitacora-panel"></div>
 
       <span class="staff-flag">Gestionar calendario</span>
-      <p class="source-note" style="margin-bottom:14px;">Tocá el lápiz para editar un taller o turno, o la ✕ para quitarlo. Los cambios se reflejan al instante en el Dashboard del vecino.</p>
+      <p class="source-note" style="margin-bottom:14px;">Tocá el lápiz para editar o la ✕ para quitar. Los cambios se reflejan al instante en el Dashboard.</p>
       <div id="infancia-manage-list" style="margin-bottom:16px;"></div>
 
       <div class="manage-form">
@@ -378,11 +405,12 @@
       </div>
 
       <div class="section-label" style="margin-top:24px;">Cargar novedad al carrusel</div>
-      <p class="source-note" style="margin-bottom:12px;">Aparece al instante en el carrusel del Dashboard del vecino.</p>
+      <p class="source-note" style="margin-bottom:12px;">Aparece al instante en el carrusel del Dashboard.</p>
       <div id="infancia-novedad-list" style="margin-bottom:12px;"></div>
       <div class="manage-form">
         <input type="text" id="infancia-nov-title" placeholder="Título de la novedad">
         <input type="text" id="infancia-nov-detail" placeholder="Bajada breve (opcional)">
+        <input type="text" id="infancia-nov-body" placeholder="Texto completo del artículo (opcional)">
         <button class="send-btn" style="margin-top:2px;" onclick="addNovedad('infancia')">+ Agregar al carrusel</button>
       </div>
 
@@ -403,14 +431,14 @@
           <div class="bar-row"><div class="lbl"><span>Gral. Pacheco</span><span class="num">3</span></div><div class="bar-track"><div class="bar-fill" style="width:60%"></div></div></div>
           <div class="bar-row"><div class="lbl"><span>Talar</span><span class="num">2</span></div><div class="bar-track"><div class="bar-fill" style="width:40%"></div></div></div>
           <div class="bar-row"><div class="lbl"><span>Rincón de Milberg</span><span class="num">1</span></div><div class="bar-track"><div class="bar-fill" style="width:20%"></div></div></div>
-          <p class="source-note" style="margin-bottom:0;">Disponible para Directoras/es Generales y Coordinadoras/es. Datos de ejemplo.</p>
+          <p class="source-note" style="margin-bottom:0;">Datos de ejemplo.</p>
         </div>
 
         <div id="infancia-graficos-pane" style="display:none;">
           <div class="pie-row">
             <div class="pie-card">
               <div class="pie-title">Talleres dados<br>por sucursal</div>
-              <div class="pie-chart" style="background:conic-gradient(#146034 0% 33.3%, #1F8A4C 33.3% 66.6%, #4CAF6D 66.6% 88.8%, #A8DAB5 88.8% 100%);"></div>
+              <div class="pie-chart" style="background:conic-gradient(#146034 0% 33.3%,#1F8A4C 33.3% 66.6%,#4CAF6D 66.6% 88.8%,#A8DAB5 88.8% 100%);"></div>
               <div class="pie-legend">
                 <div class="pie-legend-item"><span class="pie-dot" style="background:#146034;"></span>Tigre Centro <b>33%</b></div>
                 <div class="pie-legend-item"><span class="pie-dot" style="background:#1F8A4C;"></span>Gral. Pacheco <b>33%</b></div>
@@ -420,15 +448,13 @@
             </div>
             <div class="pie-card">
               <div class="pie-title">Asistencia y ausencia<br>a talleres</div>
-              <div class="pie-chart" style="background:conic-gradient(#1F8A4C 0% 76%, #d9e6dc 76% 100%);"></div>
+              <div class="pie-chart" style="background:conic-gradient(#1F8A4C 0% 76%,#d9e6dc 76% 100%);"></div>
               <div class="pie-legend">
                 <div class="pie-legend-item"><span class="pie-dot" style="background:#1F8A4C;"></span>Asistencia <b>76%</b></div>
                 <div class="pie-legend-item"><span class="pie-dot" style="background:#d9e6dc;"></span>Ausencia <b>24%</b></div>
               </div>
             </div>
           </div>
-          <p class="source-note" style="margin-bottom:18px;">Datos de ejemplo, calculados sobre inscriptos y confirmados por taller.</p>
-
           <div class="pie-row">
             <div class="pie-card">
               <div class="pie-title">Bitácora: estado de los avisos recibidos</div>
@@ -436,11 +462,11 @@
               <div class="pie-legend" id="infancia-bitacora-pie-legend"></div>
             </div>
           </div>
-          <p class="source-note" style="margin-bottom:0;">Se actualiza en tiempo real con los avisos recibidos por bitácora.</p>
+          <p class="source-note" style="margin-bottom:0;">Se actualiza en tiempo real.</p>
         </div>
 
         <button class="export-btn" onclick="exportStats('infancia')">⬇ Exportar estadísticas (CSV)</button>
-        <p class="source-note" id="infancia-edit-note" style="display:none; margin-top:10px;">🔓 Como Director General tenés acceso total: podés editar o quitar cualquier carga hecha por el equipo, en calendario, novedades y bitácora.</p>
+        <p class="source-note" id="infancia-edit-note" style="display:none;margin-top:10px;">🔓 Como Director General tenés acceso total a la plataforma.</p>
       </div>
 
       <div class="section-label" style="margin-top:24px;">Derivación externa</div>
@@ -455,16 +481,16 @@
       </div>
       <div class="contact-card">
         <h4>Asesoría de Menores e Incapaces</h4>
-        <p>Departamento Judicial San Isidro (cubre Tigre) · Para derivación judicial de casos.</p>
+        <p>Departamento Judicial San Isidro (cubre Tigre) · Para derivación judicial.</p>
       </div>
       <div class="contact-card">
         <h4>Gabinetes psicopedagógicos escolares</h4>
-        <p>Derivar a través del equipo de orientación escolar del establecimiento del niño/a.</p>
+        <p>Derivar a través del equipo de orientación escolar del establecimiento.</p>
       </div>
-      <p class="source-note">Directorio de referencia — completar y confirmar con la Secretaría antes de publicar.</p>
+      <p class="source-note">Directorio de referencia — confirmar con la Secretaría antes de publicar.</p>
     </div>
 
-    <div class="toast" id="toast-infancia">Comentario enviado de forma anónima. Gracias por avisarnos.</div>
+    <div class="toast" id="toast-infancia">Guardado correctamente.</div>
   </section>
 
 </div>
