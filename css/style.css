@@ -6,27 +6,21 @@
     --accent: var(--rojo); --accent-dark: var(--rojo-dark); --tint: var(--rojo-tint);
   }
   *{box-sizing:border-box; margin:0; padding:0;}
-  body{background:var(--bg); font-family:'Inter',sans-serif; color:var(--ink); display:flex; justify-content:center; padding:28px 12px;}
+  body{background:var(--paper); font-family:'Inter',sans-serif; color:var(--ink); margin:0; padding:0;}
   h1,h2,h3,.display{font-family:'Manrope',sans-serif;}
   .num{font-family:'IBM Plex Mono',monospace;}
 
   .device{
-    width:390px; max-width:100%; background:var(--paper); border-radius:38px;
-    box-shadow: 0 30px 60px rgba(20,10,12,.28), 0 0 0 10px #111;
-    overflow:hidden; position:relative;
+    width:100%; background:var(--paper); overflow:hidden; position:relative; min-height:100vh;
   }
-  .statusbar{
-    display:flex; justify-content:space-between; align-items:center;
-    padding:14px 22px 6px; font-size:13px; font-weight:600; color:var(--ink);
-    background:transparent; position:relative; z-index:5; margin-top:24px;
-  }
+  .statusbar{ display:none; }
   .proto-badge{
-    position:absolute; top:10px; left:14px; background:var(--ink); color:#fff;
-    font-size:9px; letter-spacing:.08em; padding:3px 8px; border-radius:20px; z-index:20;
+    position:fixed; top:10px; left:14px; background:var(--ink); color:#fff;
+    font-size:9px; letter-spacing:.08em; padding:3px 8px; border-radius:20px; z-index:200;
     text-transform:uppercase; font-family:'Manrope',sans-serif; font-weight:700; opacity:.85;
   }
 
-  .screen{ display:none; flex-direction:column; min-height:780px; position:relative; }
+  .screen{ display:none; flex-direction:column; min-height:100vh; position:relative; }
   .screen.active{ display:flex; }
 
   /* ---------- rosette motif (jaguar spot pattern) ---------- */
@@ -372,3 +366,60 @@
   .manage-event .edit-btn{ background:var(--tint); color:var(--accent-dark);}
   .cancel-link{ display:none; text-align:center; font-size:11px; font-weight:700; color:var(--ink-soft); margin-top:8px; background:none; border:none; cursor:pointer; width:100%; text-decoration:underline;}
   .home-ev-tag{ display:inline-block; font-size:8.5px; font-weight:800; color:#fff; padding:2px 8px; border-radius:10px; margin-bottom:4px;}
+
+/* ===== RESPONSIVE ===== */
+
+/* Tablet — 640px+ */
+@media(min-width:640px){
+  .hero{ padding:24px 40px 32px; }
+  .hero-greet h1{ font-size:26px; }
+  .hero-greet p{ font-size:14px; max-width:420px; }
+  .content{ padding:28px 40px; }
+  .slide{ min-width:280px; height:145px; }
+}
+
+/* Desktop chico — 900px+ */
+@media(min-width:900px){
+  .hero{
+    padding:36px calc((100% - 860px) / 2 + 36px) 44px;
+  }
+  .hero-greet h1{ font-size:34px; }
+  .hero-greet p{ font-size:15px; max-width:520px; }
+  .content{
+    max-width:860px; margin:0 auto; padding:36px 0;
+  }
+  #genero-staff,#infancia-staff{
+    max-width:860px; margin:0 auto;
+  }
+  .slide{ min-width:320px; height:160px; }
+  .slide h3{ font-size:16px; }
+  .tabbar{ display:none; }
+  .hidden-access{ max-width:860px; margin:0 auto; }
+  .toast{
+    position:fixed; bottom:24px; right:24px; left:auto;
+    width:320px; border-radius:14px;
+  }
+  .quick-grid{ max-width:480px; }
+  .onb-slide h2{ font-size:28px; }
+  .onb-slide p{ font-size:15px; }
+}
+
+/* Desktop grande — 1200px+ */
+@media(min-width:1200px){
+  .hero{
+    padding:44px calc((100% - 1080px) / 2 + 48px) 52px;
+  }
+  .hero-greet h1{ font-size:42px; }
+  .content{
+    max-width:1080px; padding:44px 0;
+  }
+  #genero-staff,#infancia-staff{
+    max-width:1080px;
+  }
+  .slide{ min-width:380px; height:180px; }
+  .slide h3{ font-size:17px; }
+  .hidden-access{ max-width:1080px; }
+  .stat-grid{ gap:16px; }
+  .stat-card b{ font-size:26px; }
+  .pie-chart{ width:110px; height:110px; }
+}
